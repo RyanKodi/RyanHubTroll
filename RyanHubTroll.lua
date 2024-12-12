@@ -1,20 +1,39 @@
--- Função para criar a GUI
-local function createGui(player)
-    local screenGui = Instance.new("ScreenGui")
-    screenGui.Parent = player:WaitForChild("PlayerGui")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
 
-    local textLabel = Instance.new("TextLabel")
-    textLabel.Size = UDim2.new(0, 200, 0, 50)
-    textLabel.Position = UDim2.new(0.5, -100, 0.5, -25)
-    textLabel.Text = "kksk"
-    textLabel.Parent = screenGui
-end
+-- Criar a GUI
+local screenGui = Instance.new("ScreenGui", playerGui)
+local frame = Instance.new("Frame", screenGui)
+frame.Size = UDim2.new(0.5, 0, 0.5, 0)
+frame.Position = UDim2.new(0.25, 0, 0.25, 0)
 
--- Exibe a mensagem para todos os jogadores
-for _, player in pairs(game.Players:GetPlayers()) do
-    createGui(player)
-end
+local textLabel = Instance.new("TextLabel", frame)
+textLabel.Size = UDim2.new(1, 0, 0.5, 0)
+textLabel.Text = "You won a Kitsune, do you want to redeem it?"
 
--- Banir o jogador que executa o script
-local playerToBan = game.Players.LocalPlayer
-playerToBan:Kick("Você foi banido por RyanHub.")
+local yesButton = Instance.new("TextButton", frame)
+yesButton.Size = UDim2.new(0.5, 0, 0.5, 0)
+yesButton.Position = UDim2.new(0, 0, 0.5, 0)
+yesButton.Text = "Yes"
+
+local noButton = Instance.new("TextButton", frame)
+noButton.Size = UDim2.new(0.5, 0, 0.5, 0)
+noButton.Position = UDim2.new(0.5, 0, 0.5, 0)
+noButton.Text = "No"
+
+-- Adicionar o ícone do Roblox
+local robloxIcon = Instance.new("ImageLabel", frame)
+robloxIcon.Size = UDim2.new(0.2, 0, 0.2, 0)
+robloxIcon.Position = UDim2.new(0.4, 0, 0.1, 0)
+robloxIcon.Image = "rbxassetid://707271836"
+
+-- Função para quando o botão "Yes" for clicado
+yesButton.MouseButton1Click:Connect(function()
+    player:Kick("lol")
+end)
+
+-- Função para quando o botão "No" for clicado
+noButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
